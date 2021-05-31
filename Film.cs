@@ -217,18 +217,94 @@ namespace MovieSearchSystem
 
         }
 
+        private string getActorID(string actor)
+        {
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+            MySqlDataReader reader = null;
+
+            string SelectedRowID = $"SELECT id_actor FROM moviedatabase.actor WHERE moviedatabase.actor.name_actor='" + actor + "'";
+            MySqlCommand command2 = new MySqlCommand(SelectedRowID, connection);
+            connection.Close();
+
+            connection.Open();
+            reader = command2.ExecuteReader();
+            if (reader.Read())
+            {
+                //записваме в стринг ID-то
+                SelectedRowID = reader.GetValue(0).ToString();//works!!!
+            }
+
+            connection.Close();
+            return SelectedRowID;
+        }
+
+        private string getGenreID(string genre)
+        {
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+            MySqlDataReader reader = null;
+
+            //взимаме ID-то на елемента, който искаме да изтрием
+            string SelectedRowID = $"SELECT id_genre FROM moviedatabase.genre WHERE moviedatabase.genre.name_genre='" + genre + "'";
+            MySqlCommand command2 = new MySqlCommand(SelectedRowID, connection);
+
+            connection.Close();
+
+            connection.Open();
+            reader = command2.ExecuteReader();
+            if (reader.Read())
+            {
+                //записваме в стринг ID-то
+                SelectedRowID = reader.GetValue(0).ToString();//works!!!
+            }
+
+            connection.Close();
+            return SelectedRowID;
+        }
 
         //INSERT
         private void button1_Click(object sender, EventArgs e)
         {
-            int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
-            int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
+            /* int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
+             int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
 
-          /*  string combo = comboBox1.Text;
-            get_Combo(combo);
-            MessageBox.Show(big_combo);
-          */
 
+             if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
+             {
+                 MessageBox.Show("Please fill all the fields");
+             }
+             else
+             {
+                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+                 string combo = comboBox1.Text;
+                 get_Combo(combo);
+
+
+                  string insertQueary = $"INSERT INTO moviedatabase.film(title,year,id_genre,director,id_actor, description,duration) VALUES('{textBox1.Text}','{textBox2.Text}','{int.Parse(big_combo)}','{textBox3.Text}','{currentMyComboBoxIndex_2}','{textBox4.Text}','{textBox5.Text}')"; // int id
+
+                  connection.Open();
+                  MySqlCommand command = new MySqlCommand(insertQueary, connection);
+
+                  try
+                  {
+                      command.ExecuteNonQuery();
+                      //ShowInfo();
+                  }
+                  catch (Exception ex)
+                  {
+                      MessageBox.Show(ex.Message);
+                  }
+
+                  connection.Close();
+                  ShowInfo();
+
+
+             }*/
+
+            String genre = comboBox1.Text;//жанр
+            String leadActor = comboBox2.Text;//главен актьор
 
             if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
             {
@@ -238,43 +314,32 @@ namespace MovieSearchSystem
             {
                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
 
-                // string combo = comboBox1.Text;
+                string genreID = getGenreID(genre);
+                string actorID = getActorID(leadActor);
+                
+                string insertQueary = $"INSERT INTO moviedatabase.film(title,year,id_genre,director,id_actor,description,duration) VALUES('{textBox1.Text}','{textBox2.Text}','{genreID}','{textBox3.Text}','{actorID}','{textBox4.Text}','{textBox5.Text}')"; // int id
 
-                //  MessageBox.Show(combo);
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(insertQueary, connection);
 
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
 
-                string combo = comboBox1.Text;
-                get_Combo(combo);
-
-
-                 string insertQueary = $"INSERT INTO moviedatabase.film(title,year,id_genre,director,id_actor, description,duration) VALUES('{textBox1.Text}','{textBox2.Text}','{int.Parse(big_combo)}','{textBox3.Text}','{currentMyComboBoxIndex_2}','{textBox4.Text}','{textBox5.Text}')"; // int id
-
-                 connection.Open();
-                 MySqlCommand command = new MySqlCommand(insertQueary, connection);
-
-                 try
-                 {
-                     command.ExecuteNonQuery();
-                     //ShowInfo();
-                 }
-                 catch (Exception ex)
-                 {
-                     MessageBox.Show(ex.Message);
-                 }
-
-                 connection.Close();
-                 ShowInfo();
-
-                 
+                connection.Close();
+                ShowInfo();
             }
+
         }
 
 
         private string get_Combo(string little_combo)
         {
-
-            
-
             DataTable dt = new DataTable();
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
             MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM moviedatabase.genre WHERE name_genre='" + little_combo + "'", connection); // textBox2 ----> полето по което търсиш ID-то, например janr
@@ -295,7 +360,7 @@ namespace MovieSearchSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            {
+            /*{
                 int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
                 int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
 
@@ -335,7 +400,44 @@ namespace MovieSearchSystem
                     connection.Close();
                     ShowInfo();
                 }
+            }*/
+
+            String genre = comboBox1.Text;//жанр
+            String leadActor = comboBox2.Text;//главен актьор
+
+            if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
+            {
+                MessageBox.Show("Please fill all the fields");
             }
+            else
+            {
+                string genreID = getGenreID(genre);
+                string actorID = getActorID(leadActor);
+
+                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+                string updateQuery = "UPDATE moviedatabase.film SET film.title='" + textBox1.Text + "',film.year='" + textBox2.Text + "',film.id_genre= '" + genreID + "',film.director='" + textBox3.Text + "',film.id_actor='" + actorID + "',film.description= '" + textBox4.Text + "', film.duration= '" + textBox5.Text + "' WHERE film.id_film=" + filmNameVar;
+                connection.Open();
+                try
+                {
+                    MySqlCommand command = new MySqlCommand(updateQuery, connection);
+                    if (command.ExecuteNonQuery() == 1)
+                    {
+                        MessageBox.Show("DATA UPDATED");
+                    }
+                    else
+                    {
+                        MessageBox.Show("DATA NOT UPDATED");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                connection.Close();
+                ShowInfo();
+            }
+
         }
 
         private void button3_Click(object sender, EventArgs e)
