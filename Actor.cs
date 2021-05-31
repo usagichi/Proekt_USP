@@ -174,9 +174,40 @@ namespace MovieSearchSystem
             connection.Close();
         }
 
+        private void deleteFilm(String actorID)
+        {
+
+
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+            try
+            {
+
+                string deleteQuery = "DELETE FROM moviedatabase.film WHERE film.id_actor='" + actorID + "'";
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(deleteQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("ACTOR FROM FILMS DELETED");
+                }
+                else
+                {
+                    MessageBox.Show("ACTOR FROM FILMS NOT DELETED");
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
+            /*if (textBox1.Text == "")
             {
                 MessageBox.Show("Please fill all the fields");
             }
@@ -208,6 +239,61 @@ namespace MovieSearchSystem
                 connection.Close();
                 ShowInfo();
 
+            }*/
+
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Please fill all the fields");
+            }
+            else
+            {
+
+                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+                try
+                {
+
+                    MySqlDataReader reader = null;
+
+                    //взимаме ID-то на елемента, който искаме да изтрием
+                    string SelectedRowID = $"SELECT id_actor FROM moviedatabase.actor WHERE moviedatabase.actor.name_actor='" + textBox1.Text + "'";
+                    MySqlCommand command2 = new MySqlCommand(SelectedRowID, connection);
+
+                    connection.Close();
+
+                    connection.Open();
+                    reader = command2.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        //записваме в стринг ID-то
+                        SelectedRowID = reader.GetValue(0).ToString();//works!!!
+                    }
+
+                    connection.Close();
+                    connection.Open();
+                    //трием по ID
+                    string deleteQuery = "DELETE FROM moviedatabase.actor WHERE actor.id_actor= '" + SelectedRowID + "'";
+
+                    MySqlCommand command = new MySqlCommand(deleteQuery, connection);
+
+                    if (command.ExecuteNonQuery() == 1)
+                    {
+                        MessageBox.Show("Actor DELETED");
+                        deleteFilm(SelectedRowID);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Actor NOT DELETED");
+                    }
+
+                }
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                connection.Close();
+                ShowInfo();
             }
         }
     }

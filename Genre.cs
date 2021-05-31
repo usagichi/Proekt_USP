@@ -231,8 +231,75 @@ namespace MovieSearchSystem
             connection.Close();
         }
 
+
+        private void deleteFilm(String genreID)
+        {
+
+
+            MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+            try
+            {
+
+                string deleteQuery = "DELETE FROM moviedatabase.film WHERE film.id_genre='" + genreID + "'";
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(deleteQuery, connection);
+
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("GENRE FROM FILMS DELETED");
+                }
+                else
+                {
+                    MessageBox.Show("GENRE FROM FILMS NOT DELETED");
+                }
+
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
+            /* if (textBox1.Text == "")
+             {
+                 MessageBox.Show("Please fill all the fields");
+             }
+             else
+             {
+
+                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
+
+                 try
+                 {
+                     string deleteQuery = "DELETE FROM moviedatabase.genre WHERE genre.id_genre= " + genreNameVar;
+                     connection.Open();
+                     MySqlCommand command = new MySqlCommand(deleteQuery, connection);
+
+                     if (command.ExecuteNonQuery() == 1)
+                     {
+                         MessageBox.Show("Genre DELETED");
+                     }
+                     else
+                     {
+                         MessageBox.Show("Genre NOT DELETED");
+                     }
+
+                 }
+
+                 catch (Exception ex)
+                 {
+                     MessageBox.Show(ex.Message);
+                 }
+                 connection.Close();
+                 ShowInfo();
+
+             }*/
+
             if (textBox1.Text == "")
             {
                 MessageBox.Show("Please fill all the fields");
@@ -244,13 +311,34 @@ namespace MovieSearchSystem
 
                 try
                 {
-                    string deleteQuery = "DELETE FROM moviedatabase.genre WHERE genre.id_genre= " + genreNameVar;
+
+                    MySqlDataReader reader = null;
+
+                    //взимаме ID-то на елемента, който искаме да изтрием
+                    string SelectedRowID = $"SELECT id_genre FROM moviedatabase.genre WHERE moviedatabase.genre.name_genre='" + textBox1.Text + "'";
+                    MySqlCommand command2 = new MySqlCommand(SelectedRowID, connection);
+
+                    connection.Close();
+
                     connection.Open();
+                    reader = command2.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        //записваме в стринг ID-то
+                        SelectedRowID = reader.GetValue(0).ToString();//works!!!
+                    }
+
+                    connection.Close();
+                    connection.Open();
+                    //трием по ID
+                    string deleteQuery = "DELETE FROM moviedatabase.genre WHERE genre.id_genre= '" + SelectedRowID + "'";
+
                     MySqlCommand command = new MySqlCommand(deleteQuery, connection);
 
                     if (command.ExecuteNonQuery() == 1)
                     {
                         MessageBox.Show("Genre DELETED");
+                        deleteFilm(SelectedRowID);
                     }
                     else
                     {
