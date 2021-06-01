@@ -55,30 +55,12 @@ namespace MovieSearchSystem
             label7.BackColor = System.Drawing.Color.Transparent;
             actors();
             genres();
-            dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+            
         }
 
         private void ShowInfo()
         {
-            /* try
-             {
-                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-                 MySqlDataAdapter adapter = new MySqlDataAdapter($"SELECT title,year,id_genre,director,id_actor,description,duration FROM moviedatabase.film", connection);
-
-                 connection.Open();
-                 DataSet ds = new DataSet();
-                 adapter.Fill(ds, "film");
-
-                 dataGridView1.DataSource = ds.Tables["film"];
-                 connection.Close();
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show(ex.Message);
-             }
-
-             dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
-             dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;*/
+            
 
             try
             {
@@ -92,6 +74,17 @@ namespace MovieSearchSystem
                 adapter.Fill(ds, "film");
 
                 dataGridView1.DataSource = ds.Tables["film"];
+
+
+                dataGridView1.Columns[0].HeaderCell.Value = "Film";
+                dataGridView1.Columns[1].HeaderCell.Value = "Year";
+                dataGridView1.Columns[2].HeaderCell.Value = "Genre";
+                dataGridView1.Columns[3].HeaderCell.Value = "Director";
+                dataGridView1.Columns[4].HeaderCell.Value = "Lead Actor";
+                dataGridView1.Columns[5].HeaderCell.Value = "Description";
+                dataGridView1.Columns[6].HeaderCell.Value = "Duration";
+
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -111,12 +104,12 @@ namespace MovieSearchSystem
 
             connection.Open();
             DataSet ds = new DataSet();
-            // adapter.Fill(ds, "stoka");
+           
             adapter.Fill(dt);
 
             if (dt.Rows.Count > 0)
             {
-                filmNameVar = dt.Rows[0]["id_film"].ToString(); //textBox3 -> там където искаш да се възуализира ID-то / или го съхраняваш в променлива (стринг е) ---- kod_na_stoka -> ID колоната в БД (при вас може да е janr_id)
+                filmNameVar = dt.Rows[0]["id_film"].ToString(); 
 
             }
             connection.Close();
@@ -124,30 +117,22 @@ namespace MovieSearchSystem
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            /*if (dataGridView1.SelectedRows.Count > 0)
-            {
-                string title = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
-                string year = dataGridView1.SelectedRows[0].Cells[1].Value + string.Empty;
-                //string genre = dataGridView1.SelectedRows[0].Cells[2].Value + string.Empty;
-
-                //textBox1.Text = ime;
-
-            }*/
+            
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     string title = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
                     string year = dataGridView1.SelectedRows[0].Cells[1].Value + string.Empty;
-                    //string avtor = dataGridView1.SelectedRows[0].Cells[2].Value + string.Empty;
+                    
 
                     string genre = comboBox1.SelectedText = dataGridView1.CurrentRow.Cells[2].Value.ToString();
 
                     string director = dataGridView1.SelectedRows[0].Cells[3].Value + string.Empty;
-                    // string izdatelstvo = dataGridView1.SelectedRows[0].Cells[4].Value + string.Empty;
+                    
                     string actor = comboBox1.SelectedText = dataGridView1.CurrentRow.Cells[4].Value.ToString();
                     string description = dataGridView1.SelectedRows[0].Cells[5].Value + string.Empty;
                     string duration = dataGridView1.SelectedRows[0].Cells[6].Value + string.Empty;
 
-                // string janr = dataGridView1.SelectedRows[0].Cells[5].Value + string.Empty;
+                
 
                     textBox1.Text = title;
                     textBox2.Text = year;
@@ -232,7 +217,7 @@ namespace MovieSearchSystem
             if (reader.Read())
             {
                 //записваме в стринг ID-то
-                SelectedRowID = reader.GetValue(0).ToString();//works!!!
+                SelectedRowID = reader.GetValue(0).ToString();
             }
 
             connection.Close();
@@ -256,7 +241,7 @@ namespace MovieSearchSystem
             if (reader.Read())
             {
                 //записваме в стринг ID-то
-                SelectedRowID = reader.GetValue(0).ToString();//works!!!
+                SelectedRowID = reader.GetValue(0).ToString();
             }
 
             connection.Close();
@@ -266,42 +251,7 @@ namespace MovieSearchSystem
         //INSERT
         private void button1_Click(object sender, EventArgs e)
         {
-            /* int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
-             int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
-
-
-             if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
-             {
-                 MessageBox.Show("Please fill all the fields");
-             }
-             else
-             {
-                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                 string combo = comboBox1.Text;
-                 get_Combo(combo);
-
-
-                  string insertQueary = $"INSERT INTO moviedatabase.film(title,year,id_genre,director,id_actor, description,duration) VALUES('{textBox1.Text}','{textBox2.Text}','{int.Parse(big_combo)}','{textBox3.Text}','{currentMyComboBoxIndex_2}','{textBox4.Text}','{textBox5.Text}')"; // int id
-
-                  connection.Open();
-                  MySqlCommand command = new MySqlCommand(insertQueary, connection);
-
-                  try
-                  {
-                      command.ExecuteNonQuery();
-                      //ShowInfo();
-                  }
-                  catch (Exception ex)
-                  {
-                      MessageBox.Show(ex.Message);
-                  }
-
-                  connection.Close();
-                  ShowInfo();
-
-
-             }*/
+           
 
             String genre = comboBox1.Text;//жанр
             String leadActor = comboBox2.Text;//главен актьор
@@ -346,12 +296,12 @@ namespace MovieSearchSystem
 
             connection.Open();
             DataSet ds = new DataSet();
-            // adapter.Fill(ds, "stoka");
+           
             adapter.Fill(dt);
 
             if (dt.Rows.Count > 0)
             {
-                big_combo = dt.Rows[0]["id_genre"].ToString(); //textBox3 -> там където искаш да се възуализира ID-то / или го съхраняваш в променлива (стринг е) ---- kod_na_stoka -> ID колоната в БД (при вас може да е janr_id)
+                big_combo = dt.Rows[0]["id_genre"].ToString(); 
 
             }
             connection.Close();
@@ -360,47 +310,7 @@ namespace MovieSearchSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*{
-                int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
-                int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
-
-
-                if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
-                {
-                    MessageBox.Show("Please fill all the fields");
-                }
-                else
-                {
-
-                    string combo = comboBox1.Text;
-                    get_Combo(combo);
-
-
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                    string updateQuery = "UPDATE moviedatabase.film SET film.title='" + textBox1.Text + "',film.year='" + textBox2.Text + "',film.id_genre= '" + int.Parse(big_combo) + "',film.director='" + textBox3.Text + "',film.id_actor='" + currentMyComboBoxIndex_2 + "',film.description= '" + textBox4.Text + "', film.duration= '" + textBox5.Text + "' WHERE film.id_film=" + filmNameVar;
-
-                    connection.Open();
-                    try
-                    {
-                        MySqlCommand command = new MySqlCommand(updateQuery, connection);
-                        if (command.ExecuteNonQuery() == 1)
-                        {
-                            MessageBox.Show("DATA UPDATED");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Data NOT UPDATED");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    connection.Close();
-                    ShowInfo();
-                }
-            }*/
+           
 
             String genre = comboBox1.Text;//жанр
             String leadActor = comboBox2.Text;//главен актьор

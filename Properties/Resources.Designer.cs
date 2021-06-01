@@ -83,6 +83,16 @@ namespace MovieSearchSystem.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cinema_background_with_movie_objects_18233871 {
+            get {
+                object obj = ResourceManager.GetObject("cinema-background-with-movie-objects_18233871", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap koloniNaTablicaFilm {
             get {
                 object obj = ResourceManager.GetObject("koloniNaTablicaFilm", resourceCulture);
