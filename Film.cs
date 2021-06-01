@@ -60,25 +60,6 @@ namespace MovieSearchSystem
 
         private void ShowInfo()
         {
-            /* try
-             {
-                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-                 MySqlDataAdapter adapter = new MySqlDataAdapter($"SELECT title,year,id_genre,director,id_actor,description,duration FROM moviedatabase.film", connection);
-
-                 connection.Open();
-                 DataSet ds = new DataSet();
-                 adapter.Fill(ds, "film");
-
-                 dataGridView1.DataSource = ds.Tables["film"];
-                 connection.Close();
-             }
-             catch (Exception ex)
-             {
-                 MessageBox.Show(ex.Message);
-             }
-
-             dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
-             dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;*/
 
             try
             {
@@ -99,7 +80,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
         }
 
 
@@ -124,15 +105,7 @@ namespace MovieSearchSystem
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            /*if (dataGridView1.SelectedRows.Count > 0)
-            {
-                string title = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
-                string year = dataGridView1.SelectedRows[0].Cells[1].Value + string.Empty;
-                //string genre = dataGridView1.SelectedRows[0].Cells[2].Value + string.Empty;
 
-                //textBox1.Text = ime;
-
-            }*/
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     string title = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
@@ -266,42 +239,6 @@ namespace MovieSearchSystem
         //INSERT
         private void button1_Click(object sender, EventArgs e)
         {
-            /* int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
-             int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
-
-
-             if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
-             {
-                 MessageBox.Show("Please fill all the fields");
-             }
-             else
-             {
-                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                 string combo = comboBox1.Text;
-                 get_Combo(combo);
-
-
-                  string insertQueary = $"INSERT INTO moviedatabase.film(title,year,id_genre,director,id_actor, description,duration) VALUES('{textBox1.Text}','{textBox2.Text}','{int.Parse(big_combo)}','{textBox3.Text}','{currentMyComboBoxIndex_2}','{textBox4.Text}','{textBox5.Text}')"; // int id
-
-                  connection.Open();
-                  MySqlCommand command = new MySqlCommand(insertQueary, connection);
-
-                  try
-                  {
-                      command.ExecuteNonQuery();
-                      //ShowInfo();
-                  }
-                  catch (Exception ex)
-                  {
-                      MessageBox.Show(ex.Message);
-                  }
-
-                  connection.Close();
-                  ShowInfo();
-
-
-             }*/
 
             String genre = comboBox1.Text;//жанр
             String leadActor = comboBox2.Text;//главен актьор
@@ -360,47 +297,7 @@ namespace MovieSearchSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*{
-                int currentMyComboBoxIndex_1 = comboBox1.FindStringExact(comboBox1.Text) + 1;
-                int currentMyComboBoxIndex_2 = comboBox2.FindStringExact(comboBox2.Text) + 1;
 
-
-                if (textBox1.Text == "" || textBox2.Text == "" || comboBox1.SelectedItem == null || textBox3.Text == "" || comboBox2.SelectedItem == null || textBox4.Text == "" || textBox5.Text == "")
-                {
-                    MessageBox.Show("Please fill all the fields");
-                }
-                else
-                {
-
-                    string combo = comboBox1.Text;
-                    get_Combo(combo);
-
-
-                    MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                    string updateQuery = "UPDATE moviedatabase.film SET film.title='" + textBox1.Text + "',film.year='" + textBox2.Text + "',film.id_genre= '" + int.Parse(big_combo) + "',film.director='" + textBox3.Text + "',film.id_actor='" + currentMyComboBoxIndex_2 + "',film.description= '" + textBox4.Text + "', film.duration= '" + textBox5.Text + "' WHERE film.id_film=" + filmNameVar;
-
-                    connection.Open();
-                    try
-                    {
-                        MySqlCommand command = new MySqlCommand(updateQuery, connection);
-                        if (command.ExecuteNonQuery() == 1)
-                        {
-                            MessageBox.Show("DATA UPDATED");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Data NOT UPDATED");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    connection.Close();
-                    ShowInfo();
-                }
-            }*/
 
             String genre = comboBox1.Text;//жанр
             String leadActor = comboBox2.Text;//главен актьор

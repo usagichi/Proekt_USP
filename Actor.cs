@@ -140,7 +140,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.SkyBlue;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -207,39 +207,6 @@ namespace MovieSearchSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
-            /*if (textBox1.Text == "")
-            {
-                MessageBox.Show("Please fill all the fields");
-            }
-            else
-            {
-                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                try
-                {
-                    string deleteQuery = "DELETE FROM moviedatabase.actor WHERE actor.id_actor= " + genreNameVar;
-                    connection.Open();
-                    MySqlCommand command = new MySqlCommand(deleteQuery, connection);
-
-                    if (command.ExecuteNonQuery() == 1)
-                    {
-                        MessageBox.Show("Actor DELETED");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Actor NOT DELETED");
-                    }
-
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                connection.Close();
-                ShowInfo();
-
-            }*/
 
             if (textBox1.Text == "")
             {

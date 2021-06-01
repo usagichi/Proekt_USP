@@ -63,7 +63,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.Lavender;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -138,42 +138,7 @@ namespace MovieSearchSystem
               
         }
 
-        /*  private int to_be_or_not_to_be_janr(string shekspeare)
-        {
-            SqlConnection connection = new SqlConnection("server=127.0.0.1;user=root;database=moviedatabase;password=");
-            SqlCommand check_exist = new SqlCommand(" select COUNT(*) from moviedatabase.genre where (name_genre=@matrix) ", connection);
 
-
-             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-
-
-               string insertQueary = $"INSERT INTO moviedatabase.genre(name_genre) VALUES('{textBox1.Text}')";
-
-               connection.Open();
-               MySqlCommand command = new MySqlCommand(insertQueary, connection);
-
-   
-        connection.Open();
-            
-            check_exist.Parameters.AddWithValue("@matrix",shekspeare);
-
-            int excalibur = (int)check_exist.ExecuteScalar();
-
-            if (excalibur > 0)
-            {
-                artur = 0;
-                connection.Close();
-
-                return artur;
-            }
-
-            artur = 1;
-            connection.Close();
-            return artur;
-
-        }
-        */
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -265,40 +230,7 @@ namespace MovieSearchSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
-            /* if (textBox1.Text == "")
-             {
-                 MessageBox.Show("Please fill all the fields");
-             }
-             else
-             {
 
-                 MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                 try
-                 {
-                     string deleteQuery = "DELETE FROM moviedatabase.genre WHERE genre.id_genre= " + genreNameVar;
-                     connection.Open();
-                     MySqlCommand command = new MySqlCommand(deleteQuery, connection);
-
-                     if (command.ExecuteNonQuery() == 1)
-                     {
-                         MessageBox.Show("Genre DELETED");
-                     }
-                     else
-                     {
-                         MessageBox.Show("Genre NOT DELETED");
-                     }
-
-                 }
-
-                 catch (Exception ex)
-                 {
-                     MessageBox.Show(ex.Message);
-                 }
-                 connection.Close();
-                 ShowInfo();
-
-             }*/
 
             if (textBox1.Text == "")
             {
