@@ -55,7 +55,7 @@ namespace MovieSearchSystem
             label7.BackColor = System.Drawing.Color.Transparent;
             actors();
             genres();
-            dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
+          //  dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void ShowInfo()
@@ -92,6 +92,16 @@ namespace MovieSearchSystem
                 adapter.Fill(ds, "film");
 
                 dataGridView1.DataSource = ds.Tables["film"];
+
+
+                dataGridView1.Columns[0].HeaderCell.Value = "Film";
+                dataGridView1.Columns[1].HeaderCell.Value = "Year";
+                dataGridView1.Columns[2].HeaderCell.Value = "Genre";
+                dataGridView1.Columns[3].HeaderCell.Value = "Director";
+                dataGridView1.Columns[4].HeaderCell.Value = "Lead Actor";
+                dataGridView1.Columns[5].HeaderCell.Value = "Description";
+                dataGridView1.Columns[6].HeaderCell.Value = "Duration";
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -99,7 +109,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
         }
 
 
@@ -477,6 +487,11 @@ namespace MovieSearchSystem
                 ShowInfo();
 
             }
-        }   
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

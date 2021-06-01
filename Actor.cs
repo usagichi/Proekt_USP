@@ -133,6 +133,9 @@ namespace MovieSearchSystem
                 adapter.Fill(ds, "actor");
 
                 dataGridView1.DataSource = ds.Tables["actor"];
+
+                dataGridView1.Columns[0].HeaderCell.Value = "Actor Name";
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -140,7 +143,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.SkyBlue;
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)

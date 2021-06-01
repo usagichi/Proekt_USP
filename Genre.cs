@@ -56,6 +56,8 @@ namespace MovieSearchSystem
                 adapter.Fill(ds, "genre");
 
                 dataGridView1.DataSource = ds.Tables["genre"];
+                dataGridView1.Columns[0].HeaderCell.Value = "Genre";
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -63,7 +65,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.Lavender;
         }
 
         protected override void OnPaint(PaintEventArgs e)
