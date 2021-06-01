@@ -55,7 +55,11 @@ namespace MovieSearchSystem
                 DataSet ds = new DataSet();
                 adapter.Fill(ds, "genre");
 
+                
                 dataGridView1.DataSource = ds.Tables["genre"];
+
+                dataGridView1.Columns[0].HeaderCell.Value = "Genre";
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -77,7 +81,7 @@ namespace MovieSearchSystem
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 string ime = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
-                //string telefon = dataGridView1.SelectedRows[0].Cells[2].Value + string.Empty;
+                
 
                 textBox1.Text = ime;
             }
@@ -95,9 +99,7 @@ namespace MovieSearchSystem
         private void button1_Click(object sender, EventArgs e)
         {
 
-          //  to_be_or_not_to_be_janr(textBox1.Text);
-
-          //  MessageBox.Show(artur.ToString());
+         
 
              if (textBox1.Text == "")
               {

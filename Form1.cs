@@ -35,12 +35,6 @@ namespace MovieSearchSystem
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //BackgroundImage = System.Drawing.Image.FromFile("D:\\Уни\\УСП\\УСП с Теди и Иван\\cinema-background-with-movie-objects_1823387.jpg");
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-
-            
-            //button1.BackgroundImage = System.Drawing.Image.FromFile("D:\\Уни\\УСП\\УСП с Теди и Иван\\block-shine-step-02.jpg");
-            //button1.BackgroundImageLayout = 
 
             
         }
