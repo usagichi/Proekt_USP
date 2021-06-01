@@ -67,7 +67,7 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.Lavender;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -140,7 +140,7 @@ namespace MovieSearchSystem
               
         }
 
-       
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -232,7 +232,7 @@ namespace MovieSearchSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
 
             if (textBox1.Text == "")
             {

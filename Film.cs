@@ -60,7 +60,6 @@ namespace MovieSearchSystem
 
         private void ShowInfo()
         {
-            
 
             try
             {
@@ -92,7 +91,8 @@ namespace MovieSearchSystem
                 MessageBox.Show(ex.Message);
             }
 
-            dataGridView1.DefaultCellStyle.BackColor = Color.Yellow;
+            dataGridView1.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
+
         }
 
 
@@ -117,7 +117,7 @@ namespace MovieSearchSystem
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
                     string title = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
@@ -251,7 +251,7 @@ namespace MovieSearchSystem
         //INSERT
         private void button1_Click(object sender, EventArgs e)
         {
-           
+
 
             String genre = comboBox1.Text;//жанр
             String leadActor = comboBox2.Text;//главен актьор
@@ -310,7 +310,7 @@ namespace MovieSearchSystem
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
+
 
             String genre = comboBox1.Text;//жанр
             String leadActor = comboBox2.Text;//главен актьор
