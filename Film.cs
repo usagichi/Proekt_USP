@@ -81,6 +81,7 @@ namespace MovieSearchSystem
             }
 
             dataGridView1.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
+         
         }
 
 
