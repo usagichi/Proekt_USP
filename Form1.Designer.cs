@@ -79,7 +79,8 @@ namespace MovieSearchSystem
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackgroundImage = global::MovieSearchSystem.Properties.Resources.cinema_background_with_movie_objects_1823387;
+            this.BackgroundImage = global::MovieSearchSystem.Properties.Resources.cinema_background_with_movie_objects_18233871;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(705, 541);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);

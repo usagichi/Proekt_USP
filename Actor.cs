@@ -38,8 +38,7 @@ namespace MovieSearchSystem
         {
             ShowInfo();
             label1.BackColor = System.Drawing.Color.Transparent;
-            //label1.Size = new System.Drawing.Size(900, 26);
-            //label1.Font = new Font("Arial", 20, FontStyle.Regular);
+           
             dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
         }
 
@@ -64,7 +63,7 @@ namespace MovieSearchSystem
                 try
                 {
                     command.ExecuteNonQuery();
-                    //ShowInfo();
+                    
 
 
                 }
@@ -133,6 +132,9 @@ namespace MovieSearchSystem
                 adapter.Fill(ds, "actor");
 
                 dataGridView1.DataSource = ds.Tables["actor"];
+
+                dataGridView1.Columns[0].HeaderCell.Value = "Actor Name";
+
                 connection.Close();
             }
             catch (Exception ex)
@@ -148,7 +150,7 @@ namespace MovieSearchSystem
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 string ime = dataGridView1.SelectedRows[0].Cells[0].Value + string.Empty;
-                //string telefon = dataGridView1.SelectedRows[0].Cells[2].Value + string.Empty;
+                
 
                 textBox1.Text = ime;
             }
@@ -159,16 +161,16 @@ namespace MovieSearchSystem
         {
             DataTable dt = new DataTable();
             MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM moviedatabase.actor WHERE name_actor='" + textBox1.Text + "'", connection); // textBox1 ----> полето по което търсиш ID-то, например janr
+            MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT * FROM moviedatabase.actor WHERE name_actor='" + textBox1.Text + "'", connection);
 
             connection.Open();
             DataSet ds = new DataSet();
-            // adapter.Fill(ds, "stoka");
+            
             adapter.Fill(dt);
 
             if (dt.Rows.Count > 0)
             {
-                genreNameVar = dt.Rows[0]["id_actor"].ToString(); //textBox3 -> там където искаш да се възуализира ID-то / или го съхраняваш в променлива (стринг е) ---- kod_na_stoka -> ID колоната в БД (при вас може да е janr_id)
+                genreNameVar = dt.Rows[0]["id_actor"].ToString(); 
 
             }
             connection.Close();
@@ -207,39 +209,7 @@ namespace MovieSearchSystem
 
         private void button3_Click(object sender, EventArgs e)
         {
-            /*if (textBox1.Text == "")
-            {
-                MessageBox.Show("Please fill all the fields");
-            }
-            else
-            {
-                MySqlConnection connection = new MySqlConnection("datasource=localhost;port=3306;username=root;password=");
-
-                try
-                {
-                    string deleteQuery = "DELETE FROM moviedatabase.actor WHERE actor.id_actor= " + genreNameVar;
-                    connection.Open();
-                    MySqlCommand command = new MySqlCommand(deleteQuery, connection);
-
-                    if (command.ExecuteNonQuery() == 1)
-                    {
-                        MessageBox.Show("Actor DELETED");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Actor NOT DELETED");
-                    }
-
-                }
-
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                connection.Close();
-                ShowInfo();
-
-            }*/
+           
 
             if (textBox1.Text == "")
             {
